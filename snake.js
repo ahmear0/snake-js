@@ -3,11 +3,12 @@ var unitSize = 20;
 var canvasWidth = 400;
 var canvasHeight = 400;
 var snake;
+var snakeColor = '#49B02B';
 var raf;
 
 function start() {
     ctx = document.getElementById("gameCanvas").getContext("2d");
-    snake = new square(unitSize, 40, 40, '#49B02B', 'snake');
+    snake = new Square(unitSize, 40, 40, snakeColor, 'snake');
     updateScreen();
 }
 
@@ -21,6 +22,7 @@ function Square(size, x, y, color, type) {
     this.update = function () {
         this.ctx = document.getElementById("gameCanvas").getContext("2d");
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fillStyle = color;
         ctx.fillRect(snake.x, snake.y, unitSize, unitSize, 'snake');
         this.printSquare();
     }
