@@ -3,3 +3,10 @@
 
 #Mac-related files
 .DS_Store
+
+#Documentation
+screenshots/*
+
+#test files
+Queue.*
+test.*
