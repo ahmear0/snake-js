@@ -2,7 +2,7 @@
 
 port of the old classic, in plain JS and HTML5/JS canvas API
 
-![latest screenshot](https://github.com/ahmear0/snake-js/master/screenshots/2.png?raw=true "progress")
+![latest screenshot](https://raw.githubusercontent.com/ahmear0/snake-js/master/screenshots/2.png?raw=true "progress")
 
 | Reference | URL |
 | ------ | ------ |
