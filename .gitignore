@@ -5,7 +5,6 @@
 .DS_Store
 
 #Documentation
-screenshots/*
 
 #test files
 Queue.*
