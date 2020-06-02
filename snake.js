@@ -13,6 +13,11 @@ function start() {
     snake = new Square(unitSize, 40, 40, snakeColor, 'snake');
     snakeSquares.push(snake);
     updateScreen();
+    showHeader();
+}
+
+function showHeader() {
+    var headerCtx = document.getElementById("header").innerHTML = "Welcome Message";
 }
 
 function Square(size, x, y, color, type) {
