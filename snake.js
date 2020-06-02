@@ -52,16 +52,16 @@ function move(x, y) {
 }
 
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 37) {
+    if(event.key === 'ArrowLeft') {
         move(-1,0);
     }
-    else if(event.keyCode == 38) {
-        move(0,-1);
+    else if(event.key === 'ArrowDown') {
+        move(0,1);
     }
-    else if(event.keyCode == 39) {
+    else if(event.key === 'ArrowRight') {
         move(1,0);
     }
-    else if(event.keyCode == 40) {
-        move(0,1);
+    else if(event.key === 'ArrowUp') {
+        move(0,-1);
     }
 });
