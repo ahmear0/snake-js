@@ -6,6 +6,7 @@ var snake;
 var snakeSquares = [];
 var snakeColor = '#49B02B';
 var raf;
+var go = false;
 
 function start() {
     ctx = document.getElementById("gameCanvas").getContext("2d");
@@ -36,7 +37,11 @@ function updateScreen() {
     for (part in snakeSquares) {
         snakeSquares[part].update();
     }
-    raf = window.requestAnimationFrame(updateScreen);
+    if (go) {
+        raf = window.requestAnimationFrame(updateScreen);
+    } else {
+        console.log("game stopped.")
+    }
 }
 
 function move(direction) {
@@ -67,10 +72,10 @@ document.addEventListener('keydown', function (event) {
         move('right');
     } else if (event.key === 'ArrowUp') {
         move('up');
-    } else if (event.key === 's') { //stop drawing in the canvas
-        stop = true;
-    } else if (event.key === 'g') {
-        stop = false;
+    } else if (event.key === '1') { //start drawing in the canvas
+        go = true;
         updateScreen();
+    } else if (event.key === '2') { //stop drawing
+        go = false;
     }
 });
