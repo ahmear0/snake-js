@@ -8,9 +8,7 @@
 
 <body align="center", onload="start()">
 
-<pre>
-    <script src="snake.js"></script>
-</pre>
+
 
     <tr>
         <td><p>Hello from plain HTML</p></td>
@@ -19,5 +17,13 @@
     <tr>
         <canvas id="gameCanvas", height="400", width="400"></canvas>
     </tr>
+    <br><br><br><br>
+    <tr><button id="up" type="button" onclick="move('up')">UP</button></tr><br>
+    <tr>
+        <td><button id="left" type="button" onclick="move('left')">LEFT</button></td>
+        <td><button id="down" type="button" onclick="move('down')">DOWN</button></td>
+        <td><button id="right" type="button" onclick="move('right')">RIGHT</button></td>
+    </tr>
+    <pre><script src="snake.js"></script></pre>
 </body>
 </html>

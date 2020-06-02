@@ -21,7 +21,6 @@ function Square(size, x, y, color, type) {
 
     this.update = function () {
         this.ctx = document.getElementById("gameCanvas").getContext("2d");
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.fillStyle = color;
         ctx.fillRect(snake.x, snake.y, unitSize, unitSize, 'snake');
         this.printSquare();
@@ -36,17 +35,17 @@ function updateScreen() {
     raf = window.requestAnimationFrame(updateScreen);
 }
 
-function move(x, y) {
-    if (x > 0) {
+function move(direction) {
+    if (direction === 'right') {
         snake.x = (snake.x + unitSize) % canvasWidth;
-    } else if (x < 0) {
+    } else if (direction === 'left') {
         if (snake.x - unitSize < 0)
             snake.x = canvasWidth - unitSize;
         else
             snake.x = Math.abs((snake.x - unitSize) % canvasWidth);
-    } else if (y > 0) {
+    } else if (direction === 'down') {
         snake.y = (snake.y + unitSize) % canvasHeight;
-    } else if (y < 0) {
+    } else if (direction === 'up') {
         if (snake.y - unitSize < 0)
             snake.y = canvasHeight - unitSize;
         else
@@ -56,12 +55,17 @@ function move(x, y) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowLeft') {
-        move(-1, 0);
+        move('left');
     } else if (event.key === 'ArrowDown') {
-        move(0, 1);
+        move('down');
     } else if (event.key === 'ArrowRight') {
-        move(1, 0);
+        move('right');
     } else if (event.key === 'ArrowUp') {
-        move(0, -1);
+        move('up');
+    } else if (event.key === 's') { //stop drawing in the canvas
+        stop = true;
+    } else if (event.key === 'g') {
+        stop = false;
+        updateScreen();
     }
 });
