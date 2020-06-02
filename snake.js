@@ -5,6 +5,7 @@ var canvasHeight = 400;
 var snake;
 var snakeSquares = [];
 var snakeColor = '#49B02B';
+var defaultDirection = 'left';
 var raf;
 var go = false;
 
@@ -27,6 +28,10 @@ function Square(size, x, y, color, type) {
     this.color = color;
     this.type = type;
 
+    if (type==='snake') {
+        this.direction = defaultDirection;
+    }
+
     this.update = function () {
         this.ctx = document.getElementById("gameCanvas").getContext("2d");
         ctx.fillStyle = color;
@@ -43,6 +48,7 @@ function updateScreen() {
         snakeSquares[part].update();
     }
     if (go) {
+        move(snake.direction);
         raf = window.requestAnimationFrame(updateScreen);
     } else {
         console.log("game stopped.")
@@ -70,13 +76,13 @@ function move(direction) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowLeft') {
-        move('left');
+        snake.direction = 'left';
     } else if (event.key === 'ArrowDown') {
-        move('down');
+        snake.direction = 'down';
     } else if (event.key === 'ArrowRight') {
-        move('right');
+        snake.direction = 'right';
     } else if (event.key === 'ArrowUp') {
-        move('up');
+        snake.direction = 'up';
     } else if (event.key === '1') { //start drawing in the canvas
         go = true;
         updateScreen();
