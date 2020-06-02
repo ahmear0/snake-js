@@ -8,7 +8,7 @@ var raf;
 
 function start() {
     ctx = document.getElementById("gameCanvas").getContext("2d");
-    snake = new square(unitSize, 50,50, '#49B02B', 'snake');
+    snake = new square(unitSize, 40,40, '#49B02B', 'snake');
     updateScreen();
 }
 
@@ -41,13 +41,19 @@ function move(x, y) {
         snake.x = (snake.x + unitSize) % canvasWidth;
     } else if (x<0)
     {
-        snake.x = Math.abs((snake.x - unitSize) % canvasWidth);
+        if (snake.x - unitSize < 0)
+            snake.x = canvasWidth;
+        else
+            snake.x = Math.abs((snake.x - unitSize) % canvasWidth);
     } else if (y>0)
     {
         snake.y = (snake.y + unitSize) % canvasHeight;
     } else if (y<0)
     {
-        snake.y = Math.abs((snake.y - unitSize) % canvasHeight);
+        if (snake.y - unitSize < 0)
+            snake.y = canvasHeight;
+        else
+            snake.y = Math.abs((snake.y - unitSize) % canvasHeight);
     }
 }
 
