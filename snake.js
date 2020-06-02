@@ -30,6 +30,9 @@ function Square(size, x, y, color, type) {
 
     if (type==='snake') {
         this.direction = defaultDirection;
+        this.changeDirection = function(newDirection) {
+            this.direction = newDirection;
+        }
     }
 
     this.update = function () {
