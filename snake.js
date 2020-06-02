@@ -3,12 +3,14 @@ var unitSize = 20;
 var canvasWidth = 400;
 var canvasHeight = 400;
 var snake;
+var snakeSquares = [];
 var snakeColor = '#49B02B';
 var raf;
 
 function start() {
     ctx = document.getElementById("gameCanvas").getContext("2d");
     snake = new Square(unitSize, 40, 40, snakeColor, 'snake');
+    snakeSquares.push(snake);
     updateScreen();
 }
 
@@ -31,7 +33,9 @@ function Square(size, x, y, color, type) {
 }
 
 function updateScreen() {
-    snake.update();
+    for (part in snakeSquares) {
+        snakeSquares[part].update();
+    }
     raf = window.requestAnimationFrame(updateScreen);
 }
 
@@ -51,6 +55,7 @@ function move(direction) {
         else
             snake.y = Math.abs((snake.y - unitSize) % canvasHeight);
     }
+    snakeSquares.push(new Square(unitSize, snake.x, snake.y, snakeColor, 'snake'));
 }
 
 document.addEventListener('keydown', function (event) {
