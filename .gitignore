@@ -1,0 +1,5 @@
+#JetBrains-related files
+.idea/*
+
+#Mac-related files
+.DS_Store
