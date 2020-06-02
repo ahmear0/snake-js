@@ -1,6 +1,7 @@
 canvas {
     border: 1px black;
     background-color: #eeeeee;
+    border-radius: 10px;
 }
 
 p {

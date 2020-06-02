@@ -1,33 +1,67 @@
-var unitSize = 30;
-var canvasSize = 400;
-var color = "green";
+var canvas;
+var ctx;
+var unitSize = 20;
+var canvasWidth = 400;
+var canvasHeight = 400;
+var snake;
+var raf;
 
-function draw() {
-    document.createElement("canvas");
-    var canvas = document.getElementById('gameCanvas');
-    var ctx = canvas.getContext('2d');
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, unitSize, unitSize);
+function start() {
+    ctx = document.getElementById("gameCanvas").getContext("2d");
+    snake = new square(unitSize, 50,50, '#49B02B', 'snake');
+    updateScreen();
 }
 
 function square(size, x, y, color, type) {
     this.size = size;
     this.x = x;
     this.y = y;
+    this.color = color;
     this.type = type;
-    this.move = function(x,y) {
-        if (x>0)
-        {
-            this.x = (this.x + unitSize) % gameContext.canvas.width;
-        } else if (x<0)
-        {
-            this.x = Math.abs((this.x - unitSize) % gameContext.canvas.width);
-        } else if (y>0)
-        {
-            this.y = (this.y + unitSize) % gameContext.canvas.height;
-        } else if (y<0)
-        {
-            this.y = Math.abs((this.y - unitSize) % gameContext.canvas.height);
-        }
+
+    this.update = function() {
+        this.ctx = document.getElementById("gameCanvas").getContext("2d");
+        ctx.clearRect(0,0,canvasWidth,canvasHeight);
+        ctx.fillRect(snake.x,snake.y,unitSize,unitSize, 'snake');
+        this.printSquare();
+    }
+    this.printSquare = function() {
+        console.log(`${this.type} was made at ` + this.x + ", " + this.y);
     }
 }
+
+function updateScreen() {
+    snake.update();
+    raf = window.requestAnimationFrame(updateScreen);
+}
+
+function move(x, y) {
+    if (x>0)
+    {
+        snake.x = (snake.x + unitSize) % canvasWidth;
+    } else if (x<0)
+    {
+        snake.x = Math.abs((snake.x - unitSize) % canvasWidth);
+    } else if (y>0)
+    {
+        snake.y = (snake.y + unitSize) % canvasHeight;
+    } else if (y<0)
+    {
+        snake.y = Math.abs((snake.y - unitSize) % canvasHeight);
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 37) {
+        move(-1,0);
+    }
+    else if(event.keyCode == 38) {
+        move(0,-1);
+    }
+    else if(event.keyCode == 39) {
+        move(1,0);
+    }
+    else if(event.keyCode == 40) {
+        move(0,1);
+    }
+});
