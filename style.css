@@ -1,9 +1,31 @@
 canvas {
     border: 1px black;
     background-color: #eeeeee;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 p {
-    color: blue;
+    color: darkslateblue;
+}
+
+header {
+    color: darkslateblue;
+    height: 50px;
+    background-color: lightblue;
+}
+
+#buttons {
+    margin:0;
+    padding:0;
+}
+
+button{
+    background-color: lightblue;
+    border: none;
+    border-radius: 4px;
+    width: 100px;
+    height: 100px;
+}
+button:after{
+    background-color: lightcyan;
 }

@@ -7,23 +7,27 @@
 </head>
 
 <body align="center", onload="start()">
-
-
-
     <tr>
-        <td><div id="header"><p>Hello from plain HTML</p></div></td>
+        <td><div id="header"></div></td>
     </tr>
     <tr><br><br></tr>
-    <tr>
-        <canvas id="gameCanvas", height="400", width="400"></canvas>
-    </tr>
+    <tr><canvas id="gameCanvas", height="400", width="400"></canvas></tr>
     <br><br><br><br>
-    <tr><button id="up" type="button" onclick="move('up')">UP</button></tr><br>
-    <tr>
-        <td><button id="left" type="button" onclick="move('left')">LEFT</button></td>
-        <td><button id="down" type="button" onclick="move('down')">DOWN</button></td>
-        <td><button id="right" type="button" onclick="move('right')">RIGHT</button></td>
-    </tr>
+    <div align="center">
+        <table align="center" id="buttons">
+        <tr>
+            <td></td>
+            <td><button id="up" type="button" onclick="move('up')">UP</button></td>
+            <td></td>
+        </tr><br>
+        <tr>
+            <td><button id="left" type="button" onclick="move('left')">LEFT</button></td>
+            <td><button id="down" type="button" onclick="move('down')">DOWN</button></td>
+            <td><button id="right" type="button" onclick="move('right')">RIGHT</button></td>
+        </tr>
+        </table>
+    </div>
+</body>
     <pre><script src="snake.js"></script></pre>
 </body>
 </html>
