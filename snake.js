@@ -41,14 +41,14 @@ function move(x, y) {
         snake.x = (snake.x + unitSize) % canvasWidth;
     } else if (x < 0) {
         if (snake.x - unitSize < 0)
-            snake.x = canvasWidth;
+            snake.x = canvasWidth - unitSize;
         else
             snake.x = Math.abs((snake.x - unitSize) % canvasWidth);
     } else if (y > 0) {
         snake.y = (snake.y + unitSize) % canvasHeight;
     } else if (y < 0) {
         if (snake.y - unitSize < 0)
-            snake.y = canvasHeight;
+            snake.y = canvasHeight - unitSize;
         else
             snake.y = Math.abs((snake.y - unitSize) % canvasHeight);
     }
