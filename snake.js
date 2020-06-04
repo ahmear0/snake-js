@@ -37,7 +37,8 @@ function Square(size, x, y, color, type) {
 
     this.update = function () {
         this.ctx = document.getElementById("gameCanvas").getContext("2d");
-        ctx.fillStyle = color;
+        snakeColor = changeHue(snakeColor, 'r');
+        ctx.fillStyle = snakeColor;
         ctx.fillRect(snake.x, snake.y, unitSize, unitSize, 'snake');
         this.printSquare();
     }
@@ -93,3 +94,28 @@ document.addEventListener('keydown', function (event) {
         go = false;
     }
 });
+
+function changeHue(currentColor, choice) {
+    const hueLimit = 256;
+    var r = parseInt(currentColor[1] + currentColor[2], 16);
+    var g = parseInt(currentColor[3] + currentColor[4], 16);
+    var b = parseInt(currentColor[5] + currentColor[6], 16);
+    //console.log("r was " + r + ", g was " + g + ", b was " + b);
+    if (choice === 'r') {
+        r = (r + 1) % hueLimit;
+    } else if (choice === 'g') {
+        g = (g + 1) % hueLimit;
+    } else if (choice === 'b') {
+        b = (b + 1) % hueLimit;
+    }
+    //console.log("r now " + r + ", g now " + g + ", b now " + b);
+    var newHue = '#' + pad(r.toString(16)) + pad(g.toString(16)) + pad(b.toString(16));
+    //console.log("color is " + newHue);
+    return newHue;
+
+    function pad(string) {
+        if (string.length === 1)
+            return '0' + string;
+        return string;
+    }
+}
