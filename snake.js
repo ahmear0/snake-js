@@ -3,6 +3,7 @@ var unitSize = 20;
 var canvasWidth = 400;
 var canvasHeight = 400;
 var snake;
+var apple;
 var snakeSquares = [];
 var snakeColor = '#49B02B';
 var defaultDirection = 'left';
@@ -13,6 +14,9 @@ function start() {
     ctx = document.getElementById("gameCanvas").getContext("2d");
     snake = new Square(unitSize, 40, 40, snakeColor, 'snake');
     snakeSquares.push(snake);
+    let rand = getRandomLocation();
+    apple = new Square(unitSize, rand[0], rand[1], 'black', 'apple');
+    apple.update();
     updateScreen();
     showHeader();
 }
@@ -37,9 +41,11 @@ function Square(size, x, y, color, type) {
 
     this.update = function () {
         this.ctx = document.getElementById("gameCanvas").getContext("2d");
-        snakeColor = changeHue(snakeColor, 'r');
+        if (type==='snake') {
+            snakeColor = changeHue(snakeColor, 'r');
+        }
         ctx.fillStyle = snakeColor;
-        ctx.fillRect(snake.x, snake.y, unitSize, unitSize, 'snake');
+        ctx.fillRect(this.x, this.y, unitSize, unitSize, type);
         this.printSquare();
     }
     this.printSquare = function () {
@@ -57,6 +63,12 @@ function updateScreen() {
     } else {
         console.log("game stopped.")
     }
+}
+
+function getRandomLocation() {
+    this.x = parseInt(Math.random()*(canvasWidth-unitSize)/unitSize)*unitSize;
+    this.y = parseInt(Math.random()*(canvasHeight-unitSize)/unitSize)*unitSize;
+    return [x,y];
 }
 
 function getNextLocation(direction) {
