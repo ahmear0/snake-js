@@ -52,14 +52,14 @@ function updateScreen() {
         snakeSquares[part].update();
     }
     if (go) {
-        move(snake.direction);
+        moveTo(getNextLocation(snake.direction));
         raf = window.requestAnimationFrame(updateScreen);
     } else {
         console.log("game stopped.")
     }
 }
 
-function move(direction) {
+function getNextLocation(direction) {
     if (direction === 'right') {
         snake.x = (snake.x + unitSize) % canvasWidth;
     } else if (direction === 'left') {
@@ -75,6 +75,12 @@ function move(direction) {
         else
             snake.y = Math.abs((snake.y - unitSize) % canvasHeight);
     }
+    return [snake.x,snake.y];
+}
+
+function moveTo(x,y) {
+    snake.x = getNextLocation(snake.direction)[0];
+    snake.y = getNextLocation(snake.direction)[1];
     snakeSquares.push(new Square(unitSize, snake.x, snake.y, snakeColor, 'snake'));
 }
 
