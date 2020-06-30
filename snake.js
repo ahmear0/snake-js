@@ -16,11 +16,11 @@ const fps = 15;
 function start() {
     showHeader();
     ctx = document.getElementById("gameCanvas").getContext("2d");
-    snake = new Square(unitSize, 40, 40, snakeColor, 'snake');
+    snake = new Square(40, 40, snakeColor, 'snake');
     snake.update();
     snakeSquares.push(snake);
     let rand = getRandomLocation();
-    apple = new Square(unitSize, rand[0], rand[1], 'black', 'apple');
+    apple = new Square(rand[0], rand[1], 'black', 'apple');
     apple.update();
     animateWithDelay(fps);
 }
@@ -105,7 +105,7 @@ function getNextLocation(direction) {
 
 function move() {
     [snake.x, snake.y] = getNextLocation(snake.direction);
-    snakeSquares.push(new Square(unitSize, snake.x, snake.y, snakeColor, 'snake'));
+    snakeSquares.push(new Square(snake.x, snake.y, snakeColor, 'snake'));
 }
 
 document.addEventListener('keydown', function (event) {
