@@ -9,16 +9,20 @@ var snakeColor = '#49B02B';
 var defaultDirection = 'left';
 var raf;
 var go = false;
+var interval;
+var initialTime, currentTime, elapsedTime;
+var fps = 15;
 
 function start() {
+    showHeader();
     ctx = document.getElementById("gameCanvas").getContext("2d");
     snake = new Square(unitSize, 40, 40, snakeColor, 'snake');
+    snake.update();
     snakeSquares.push(snake);
     let rand = getRandomLocation();
     apple = new Square(unitSize, rand[0], rand[1], 'black', 'apple');
     apple.update();
-    updateScreen();
-    showHeader();
+    animateWithDelay(fps);
 }
 
 function showHeader() {
@@ -33,6 +37,7 @@ function Square(size, x, y, color, type) {
     this.type = type;
 
     if (type==='snake') {
+        this.color = snakeColor;
         this.direction = defaultDirection;
         this.changeDirection = function(newDirection) {
             this.direction = newDirection;
@@ -41,10 +46,7 @@ function Square(size, x, y, color, type) {
 
     this.update = function () {
         this.ctx = document.getElementById("gameCanvas").getContext("2d");
-        if (type==='snake') {
-            snakeColor = changeHue(snakeColor, 'r');
-        }
-        ctx.fillStyle = snakeColor;
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, unitSize, unitSize, type);
         this.printSquare();
     }
@@ -53,15 +55,30 @@ function Square(size, x, y, color, type) {
     }
 }
 
+function animateWithDelay(fps) {
+    interval = 1000/fps;
+    initialTime = window.performance.now();
+    updateScreen();
+}
+
 function updateScreen() {
-    for (part in snakeSquares) {
-        snakeSquares[part].update();
-    }
-    if (go) {
-        moveTo(getNextLocation(snake.direction));
-        raf = window.requestAnimationFrame(updateScreen);
-    } else {
-        console.log("game stopped.")
+    raf = window.requestAnimationFrame(updateScreen);
+
+    currentTime = window.performance.now();
+    elapsedTime = currentTime - initialTime;
+
+    if (elapsedTime > interval) {
+        initialTime = window.performance.now();
+        for (part in snakeSquares) {
+            snakeSquares[part].update();
+        }
+        if (go) {
+            move();
+
+        } else {
+            console.log("game is stopped.")
+        }
+
     }
 }
 
@@ -90,9 +107,8 @@ function getNextLocation(direction) {
     return [snake.x,snake.y];
 }
 
-function moveTo(x,y) {
-    snake.x = getNextLocation(snake.direction)[0];
-    snake.y = getNextLocation(snake.direction)[1];
+function move() {
+    [snake.x, snake.y] = getNextLocation(snake.direction);
     snakeSquares.push(new Square(unitSize, snake.x, snake.y, snakeColor, 'snake'));
 }
 
